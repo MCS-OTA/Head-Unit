@@ -9,6 +9,7 @@
         <file>./image/icon_menu3.png</file>
         <file>./image/icon_mode.png</file>
         <file>./image/icon_music.png</file>
+	<file>./image/icon_weather.png</file>
         <file>./image/icon_youtube.png</file>
         <file>./image/img_revuelto.png</file>
         <file>./image/Battery.png</file>
@@ -38,5 +39,6 @@
 	<file>./image/img_dist_green.png</file>
 	<file>./image/img_dist_orange.png</file>
 	<file>./image/img_dist_red.png</file>
+	<file>./image/bg_sport.png</file>
     </qresource>
 </RCC>

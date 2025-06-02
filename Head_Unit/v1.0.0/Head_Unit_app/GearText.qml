@@ -30,7 +30,7 @@ Item {
         Text {
             text: gearButton.gearLevel
             font.pixelSize: 50
-            color: "white"
+            color: gearController.selectedButton === gearButton.gearLevel ? "white" : "#979797"
             anchors.centerIn: parent
         }
 

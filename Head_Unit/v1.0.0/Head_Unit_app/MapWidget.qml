@@ -3,8 +3,8 @@ import QtWebEngine 1.0
 
 Item {
     id: mapWidget
-    width: 460
-    height: 560
+    width: 280
+    height: 240
 
     AppWidget {
         id: map_widget
