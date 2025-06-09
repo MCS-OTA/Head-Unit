@@ -5,6 +5,7 @@
 #include "EWIEGA46WW/moc_gearController.cpp"
 #include "EWIEGA46WW/moc_mapController.cpp"
 #include "EWIEGA46WW/moc_mp3player.cpp"
+#include "EWIEGA46WW/moc_otaUpdate.cpp"
 #include "EWIEGA46WW/moc_usbscanner.cpp"
 #include "EWIEGA46WW/moc_weather.cpp"
 #include "EWIEGA46WW/moc_youtubeController.cpp"

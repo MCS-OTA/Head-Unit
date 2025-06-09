@@ -11,7 +11,7 @@ CarInfoController::CarInfoController(QObject *parent)
 
     myProxy->getProxyStatusEvent().subscribe([this](CommonAPI::AvailabilityStatus status){
         if(status == CommonAPI::AvailabilityStatus::AVAILABLE){
-            std::cout<<"Proxy is Avbbbbbailable"<<std::endl;
+            std::cout<<"Proxy is Avbbbbbailable_Controller"<<std::endl;
         }else{
             std::cout<<"Proxy is NOT bbbbbbbbbAvailable"<<std::endl;
         }

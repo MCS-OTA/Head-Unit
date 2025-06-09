@@ -272,6 +272,12 @@
 		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/mp3player.h">
 			<Option target="Head_Unit_app"/>
 		</Unit>
+		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/otaUpdate.cpp">
+			<Option target="Head_Unit_app"/>
+		</Unit>
+		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/otaUpdate.h">
+			<Option target="Head_Unit_app"/>
+		</Unit>
 		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/qml.qrc">
 			<Option target="Head_Unit_app"/>
 		</Unit>

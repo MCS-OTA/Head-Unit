@@ -52,6 +52,8 @@ set(PROJECT_SOURCES
         battery.h
         mp3player.cpp
         mp3player.h
+        otaUpdate.cpp
+        otaUpdate.h
         usbscanner.cpp
         usbscanner.h
         extract_cover.py

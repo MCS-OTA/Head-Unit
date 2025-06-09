@@ -10,6 +10,7 @@
 #include "gearController.h"
 #include "youtubeController.h"
 #include "carInfoController.h"
+#include "otaUpdate.h"
 #include "mp3player.h"
 #include "usbscanner.h"
 
@@ -43,6 +44,9 @@ int main(int argc, char *argv[])
 
     CarInfoController carInfoController;
     engine.rootContext()->setContextProperty("carInfoController", &carInfoController);
+
+    OtaUpdate otaUpdate;
+    engine.rootContext()->setContextProperty("otaUpdate", &otaUpdate);
 
     MP3Player mp3Player;
     engine.rootContext()->setContextProperty("mp3Player", &mp3Player);

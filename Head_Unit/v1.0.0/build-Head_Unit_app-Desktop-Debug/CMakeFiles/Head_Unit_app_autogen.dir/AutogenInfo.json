@@ -38,6 +38,11 @@
 			"EWIEGA46WW/moc_mp3player.cpp"
 		],
 		[
+			"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/otaUpdate.h",
+			"MU",
+			"EWIEGA46WW/moc_otaUpdate.cpp"
+		],
+		[
 			"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/usbscanner.h",
 			"MU",
 			"EWIEGA46WW/moc_usbscanner.cpp"
@@ -151,6 +156,10 @@
 		],
 		[
 			"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/mp3player.cpp",
+			"MU"
+		],
+		[
+			"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/otaUpdate.cpp",
 			"MU"
 		],
 		[

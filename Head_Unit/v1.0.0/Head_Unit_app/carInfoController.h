@@ -60,7 +60,7 @@ private slots:
         float randomDistance = static_cast<float>(randomDistanceInt) / 100.0f;
         randomDistance = std::round(randomDistance * 10) / 10.0f;
         setDistance(randomDistance);
-        std::cout << "New random distance: " << randomDistance << " cm" << std::endl;
+        //std::cout << "New random distance: " << randomDistance << " cm" << std::endl;
     }
 
 private:

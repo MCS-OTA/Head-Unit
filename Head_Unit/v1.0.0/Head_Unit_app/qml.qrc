@@ -27,5 +27,6 @@
         <file>TopLayer.qml</file>
         <file>BottomLayer.qml</file>
         <file>CarInfo.qml</file>
+	<file>UpdateWindow.qml</file>
     </qresource>
 </RCC>
