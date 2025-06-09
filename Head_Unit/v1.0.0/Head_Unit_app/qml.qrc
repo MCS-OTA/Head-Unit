@@ -24,5 +24,8 @@
         <file>DistanceImageSet.qml</file>
         <file>SettingApplication.qml</file>
         <file>SettingMenuButton.qml</file>
+        <file>TopLayer.qml</file>
+        <file>BottomLayer.qml</file>
+        <file>CarInfo.qml</file>
     </qresource>
 </RCC>

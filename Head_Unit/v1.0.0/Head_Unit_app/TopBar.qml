@@ -5,7 +5,7 @@ Item {
     height: 40
     Rectangle {
         anchors.fill: parent
-        color: "#000000"
+        color: "transparent"
     }
 
     Item {
@@ -37,7 +37,7 @@ Item {
 
             Rectangle {
                 id: battery
-                width: 45 * (carInfoController.batteryLevel / 100.0)
+                width: 45 * (carInfoController.batteryValue / 100.0)
                 height: 15
                 color: "light green"
                 radius: 1
@@ -47,7 +47,7 @@ Item {
 
             Text {
                 id: batteryText
-                text: carInfoController.batteryLevel + "%"
+                text: carInfoController.batteryValue || "No Data"//carInfoController.batteryLevel + " %"
                 color: "#FFFFFF"
 
                 anchors.centerIn: battery

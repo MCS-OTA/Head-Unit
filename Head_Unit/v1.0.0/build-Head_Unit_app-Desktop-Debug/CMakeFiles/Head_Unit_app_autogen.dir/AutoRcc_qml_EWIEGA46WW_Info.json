@@ -7,10 +7,12 @@
 	"INCLUDE_DIR" : "/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/build-Head_Unit_app-Desktop-Debug/Head_Unit_app_autogen/include",
 	"INPUTS" : 
 	[
+		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/TopLayer.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/AppWidget.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/WeatherApplication.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/SettingApplication.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/MapWidget.qml",
+		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/BottomLayer.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/GearWidget.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/StartScreen.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/MusicApplication.qml",
@@ -18,6 +20,7 @@
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/GearText.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/GearBoxWindow.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/TopBar.qml",
+		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/CarInfo.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/VideoObject.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/InfoWidget.qml",
 		"/home/hanbin/OTA/Head-Unit/Head_Unit/v1.0.0/Head_Unit_app/GearBox.qml",
