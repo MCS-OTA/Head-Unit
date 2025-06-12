@@ -54,6 +54,8 @@ public:
 
     void firePdcStatusChangedEvent(const int32_t &_distValue);
 
+    void fireAskNotifyEvent(const int32_t &_ask);
+
     void deactivateManagedInstances() {}
     
     CommonAPI::SomeIP::GetAttributeStubDispatcher<
@@ -84,6 +86,14 @@ public:
         std::tuple< CommonAPI::SomeIP::IntegerDeployment<int32_t>>,
         std::tuple< CommonAPI::SomeIP::IntegerDeployment<int32_t>>
     > setModeStubDispatcher;
+    
+    CommonAPI::SomeIP::MethodWithReplyStubDispatcher<
+        ::v0::commonapi::ICStub,
+        std::tuple< int32_t>,
+        std::tuple< int32_t>,
+        std::tuple< CommonAPI::SomeIP::IntegerDeployment<int32_t>>,
+        std::tuple< CommonAPI::SomeIP::IntegerDeployment<int32_t>>
+    > answerNotifyStubDispatcher;
     
     ICSomeIPStubAdapterInternal(
         const CommonAPI::SomeIP::Address &_address,
@@ -118,10 +128,19 @@ public:
             std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr)),
             std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr)))
         
+        ,
+        answerNotifyStubDispatcher(
+            &ICStub::answerNotify,
+            false,
+            _stub->hasElement(3),
+            std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr)),
+            std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr)))
+        
     {
         ICSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x7530) }, &setGearStubDispatcher );
         ICSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x7531) }, &getBatteryStubDispatcher );
         ICSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x7532) }, &setModeStubDispatcher );
+        ICSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x7533) }, &answerNotifyStubDispatcher );
         // Provided events/fields
         {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
@@ -142,6 +161,11 @@ public:
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
             itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(0x80f3));
             CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x9c43), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_EVENT, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
+        }
+        {
+            std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(0x80f3));
+            CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x9c44), itsEventGroups, CommonAPI::SomeIP::event_type_e::ET_EVENT, CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE);
         }
     }
 
@@ -200,6 +224,19 @@ void ICSomeIPStubAdapterInternal<_Stub, _Stubs...>::firePdcStatusChangedEvent(co
             CommonAPI::SomeIP::event_id_t(0x9c43),
             false,
              deployed_distValue 
+    );
+}
+
+template <typename _Stub, typename... _Stubs>
+void ICSomeIPStubAdapterInternal<_Stub, _Stubs...>::fireAskNotifyEvent(const int32_t &_ask) {
+    CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t>> deployed_ask(_ask, static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr));
+    CommonAPI::SomeIP::StubEventHelper<CommonAPI::SomeIP::SerializableArguments<  CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t> > 
+    >>
+        ::sendEvent(
+            *this,
+            CommonAPI::SomeIP::event_id_t(0x9c44),
+            false,
+             deployed_ask 
     );
 }
 

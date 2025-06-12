@@ -17,7 +17,7 @@ OtaUpdate::OtaUpdate(QObject *parent)
 
     myProxy->getProxyStatusEvent().subscribe([this](CommonAPI::AvailabilityStatus status){
         if(status == CommonAPI::AvailabilityStatus::AVAILABLE){
-            std::cout<<"Proxy is Avbbbbbailable"<<std::endl;
+            std::cout<<"Proxy is Avbbbbbailable_OTA"<<std::endl;
         }else{
             std::cout<<"Proxy is NOT bbbbbbbbbAvailable"<<std::endl;
         }
@@ -26,7 +26,7 @@ OtaUpdate::OtaUpdate(QObject *parent)
     myProxy->getAskNotifyEvent().subscribe([this](int32_t updateRequest){
         qDebug() << "\nUpdate Request" << updateRequest;
         std::cout << "\nUpdate Request" << updateRequest << std::endl;
-        m_updateRequest = updateRequest;
+        setUpdateRequest(updateRequest);
         emit updateNotify();
     });
     std::cout << "Pailable3" << std::endl;
@@ -38,6 +38,8 @@ int OtaUpdate::updateRequestValue() const {
 
 void OtaUpdate::setUpdateRequest(int updateRequest){
     m_updateRequest = updateRequest;
+    std::cout << "\nUPDATE Request: " << m_updateRequest << std::endl;
+    emit updateNotify();
 }
 
 int OtaUpdate::updateResponseValue() const {
@@ -56,5 +58,17 @@ void OtaUpdate::setUpdateResponse(int updateResponse){
             }
         });
         std::cout << "\nSend Yes\n" << std::endl;
+    }
+    else if (updateResponse == 0) {
+        std::cout << "\nNo Callback\n" << std::endl;
+        myProxy->answerNotifyAsync(updateResponse, [this](const CommonAPI::CallStatus& callStatus, const int32_t& result){
+            if(callStatus == CommonAPI::CallStatus::SUCCESS){
+                std::cout << "\nReject Update\n" << std::endl;
+            }
+            else{
+                std::cout << "\nFail to send the reject data\n" << std::endl;
+            }
+        });
+        std::cout << "\nSend No\n" << std::endl;
     }
 }

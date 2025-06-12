@@ -59,4 +59,16 @@ void OtaUpdate::setUpdateResponse(int updateResponse){
         });
         std::cout << "\nSend Yes\n" << std::endl;
     }
+    else if (updateResponse == 0) {
+        std::cout << "\nNo Callback\n" << std::endl;
+        myProxy->answerNotifyAsync(updateResponse, [this](const CommonAPI::CallStatus& callStatus, const int32_t& result){
+            if(callStatus == CommonAPI::CallStatus::SUCCESS){
+                std::cout << "\nReject Update\n" << std::endl;
+            }
+            else{
+                std::cout << "\nFail to send the reject data\n" << std::endl;
+            }
+        });
+        std::cout << "\nSend No\n" << std::endl;
+    }
 }

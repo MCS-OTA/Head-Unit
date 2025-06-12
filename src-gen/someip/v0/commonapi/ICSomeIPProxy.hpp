@@ -62,6 +62,8 @@ public:
 
     virtual PdcStatusChangedEvent& getPdcStatusChangedEvent();
 
+    virtual AskNotifyEvent& getAskNotifyEvent();
+
     virtual void setGear(std::string _gear, CommonAPI::CallStatus &_internalCallStatus, int32_t &_result, const CommonAPI::CallInfo *_info);
 
     virtual std::future<CommonAPI::CallStatus> setGearAsync(const std::string &_gear, SetGearAsyncCallback _callback, const CommonAPI::CallInfo *_info);
@@ -74,6 +76,10 @@ public:
 
     virtual std::future<CommonAPI::CallStatus> setModeAsync(const int32_t &_mode, SetModeAsyncCallback _callback, const CommonAPI::CallInfo *_info);
 
+    virtual void answerNotify(int32_t _answer, CommonAPI::CallStatus &_internalCallStatus, int32_t &_result, const CommonAPI::CallInfo *_info);
+
+    virtual std::future<CommonAPI::CallStatus> answerNotifyAsync(const int32_t &_answer, AnswerNotifyAsyncCallback _callback, const CommonAPI::CallInfo *_info);
+
     virtual void getOwnVersion(uint16_t &_major, uint16_t &_minor) const;
 
     virtual std::future<void> getCompletionFuture();
@@ -83,6 +89,7 @@ private:
     CommonAPI::SomeIP::Event<GearStatusChangedEvent, CommonAPI::Deployable< std::string, CommonAPI::SomeIP::StringDeployment >> gearStatusChanged_;
     CommonAPI::SomeIP::Event<LrSignStatusChangedEvent, CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t> >> lrSignStatusChanged_;
     CommonAPI::SomeIP::Event<PdcStatusChangedEvent, CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t> >> pdcStatusChanged_;
+    CommonAPI::SomeIP::Event<AskNotifyEvent, CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t> >> askNotify_;
 
 };
 

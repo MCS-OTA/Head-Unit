@@ -1,6 +1,51 @@
+# 수정된 CMakeLists.txt - DESC_LENGTH 문제 해결
 cmake_minimum_required(VERSION 3.14)
 
-project(Head_Unit_app VERSION 0.1 LANGUAGES CXX)
+project(Head_Unit_app VERSION 0.0.0 LANGUAGES CXX ASM)
+string(TIMESTAMP BUILD_TIMESTAMP "%Y-%m-%d %H:%M:%S")
+set(VERSION_STRING ${PROJECT_VERSION})
+set(APP_NAME ${PROJECT_NAME})
+
+# 실제 문자열 구성
+set(VERSION_INFO_STRING "version=${VERSION_STRING};timestamp=${BUILD_TIMESTAMP}")
+
+# 문자열 길이 동적 계산 (null terminator 포함)
+string(LENGTH "${VERSION_INFO_STRING}" DESC_LENGTH_RAW)
+math(EXPR DESC_LENGTH "${DESC_LENGTH_RAW} + 1")
+
+# 디버깅 출력 (문제 해결 후 제거 가능)
+message(STATUS "=== ELF Note Generation Debug ===")
+message(STATUS "VERSION_STRING: '${VERSION_STRING}'")
+message(STATUS "BUILD_TIMESTAMP: '${BUILD_TIMESTAMP}'")
+message(STATUS "VERSION_INFO_STRING: '${VERSION_INFO_STRING}'")
+message(STATUS "DESC_LENGTH_RAW: ${DESC_LENGTH_RAW}")
+message(STATUS "DESC_LENGTH (with null): ${DESC_LENGTH}")
+message(STATUS "================================")
+
+# 캐시 변수로 설정하여 안전성 확보
+set(DESC_LENGTH ${DESC_LENGTH} CACHE INTERNAL "Description length for ELF note")
+
+set(VERSION_NOTE_FILE ${CMAKE_BINARY_DIR}/version_note.S)
+
+# 중요: 변수 전달 순서와 따옴표 처리
+add_custom_command(
+    OUTPUT ${VERSION_NOTE_FILE}
+    COMMAND ${CMAKE_COMMAND}
+        -DOUTPUT_FILE=${VERSION_NOTE_FILE}
+        -DVERSION=${VERSION_STRING}
+        "-DTIMESTAMP=${BUILD_TIMESTAMP}"          # 공백 때문에 따옴표 필요
+        -DDESC_LENGTH=${DESC_LENGTH}
+        -P ${CMAKE_SOURCE_DIR}/generateNote.cmake
+    DEPENDS ${CMAKE_SOURCE_DIR}/generateNote.cmake
+    COMMENT "Generating version_note.S with desc_length=${DESC_LENGTH}"
+    VERBATIM  # 명령행 인자를 안전하게 처리
+)
+
+add_custom_target(generate_version_note DEPENDS ${VERSION_NOTE_FILE})
+
+# 어셈블리 파일 포함
+add_library(version_note_obj OBJECT ${VERSION_NOTE_FILE})
+add_dependencies(version_note_obj generate_version_note)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -55,6 +100,8 @@ set(PROJECT_SOURCES
         usbscanner.cpp
         usbscanner.h
         extract_cover.py
+        otaUpdate.cpp
+        otaUpdate.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -63,28 +110,25 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         ${RESOURCE_FILES}
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET Head_Unit_app APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
         add_library(Head_Unit_app SHARED
             ${PROJECT_SOURCES}
             ${RESOURCE_FILES}
         )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(Head_Unit_app
           ${PROJECT_SOURCES}
           ${RESOURCE_FILES}
-#          ../src-gen/someip/v0/commonapi/ICSomeIPDeployment.cpp
-#          ../src-gen/someip/v0/commonapi/ICSomeIPProxy.cpp
-#          ../src-gen/someip/v0/commonapi/ICSomeIPStubAdapter.cpp
         )
     endif()
 endif()
+
+# version_note_obj를 Head_Unit_app에 링크
+target_link_libraries(Head_Unit_app PRIVATE $<TARGET_OBJECTS:version_note_obj>)
+
+# 링크 시 section을 유지하도록 설정
+target_link_options(Head_Unit_app PRIVATE "-Wl,--no-gc-sections")
 
 include_directories(
     ../../../src-gen/
@@ -100,6 +144,7 @@ target_compile_definitions(Head_Unit_app
 
 link_directories(
     ../install_folder/lib)
+
 # CommonAPI 라이브러리 찾기
 find_library(COMMONAPI_LIB CommonAPI PATHS ../../../install_folder/lib)
 find_library(COMMONAPI_SOMEIP_LIB CommonAPI-SomeIP PATHS ../../../install_folder/lib)

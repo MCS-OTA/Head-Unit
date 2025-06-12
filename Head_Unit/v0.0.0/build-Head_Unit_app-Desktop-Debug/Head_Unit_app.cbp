@@ -215,6 +215,76 @@
 					<DistClean command="/home/hanbin/.local/bin/ninja -v clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="version_note_obj">
+				<Option output="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug/CMakeFiles/version_note_obj.dir/version_note_obj.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../src-gen"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../install_folder/include/CommonAPI-3.2"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../install_folder/include"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../install_folder/lib"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../src-gen/core"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../src-gen/someip"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/home/hanbin/.local/bin/ninja -v version_note_obj"/>
+					<CompileFile command="/home/hanbin/.local/bin/ninja -v &quot;$file&quot;"/>
+					<Clean command="/home/hanbin/.local/bin/ninja -v clean"/>
+					<DistClean command="/home/hanbin/.local/bin/ninja -v clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="version_note_obj/fast">
+				<Option output="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug/CMakeFiles/version_note_obj.dir/version_note_obj.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../src-gen"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../install_folder/include/CommonAPI-3.2"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../install_folder/include"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../install_folder/lib"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../src-gen/core"/>
+					<Add directory="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/../../../src-gen/someip"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/home/hanbin/.local/bin/ninja -v version_note_obj/fast"/>
+					<CompileFile command="/home/hanbin/.local/bin/ninja -v &quot;$file&quot;"/>
+					<Clean command="/home/hanbin/.local/bin/ninja -v clean"/>
+					<DistClean command="/home/hanbin/.local/bin/ninja -v clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="generate_version_note">
+				<Option working_dir="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/hanbin/.local/bin/ninja -v generate_version_note"/>
+					<CompileFile command="/home/hanbin/.local/bin/ninja -v &quot;$file&quot;"/>
+					<Clean command="/home/hanbin/.local/bin/ninja -v clean"/>
+					<DistClean command="/home/hanbin/.local/bin/ninja -v clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="IC_someip-someip_autogen">
 				<Option working_dir="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug"/>
 				<Option type="4"/>
@@ -272,6 +342,12 @@
 		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/mp3player.h">
 			<Option target="Head_Unit_app"/>
 		</Unit>
+		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/otaUpdate.cpp">
+			<Option target="Head_Unit_app"/>
+		</Unit>
+		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/otaUpdate.h">
+			<Option target="Head_Unit_app"/>
+		</Unit>
 		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/Head_Unit_app/qml.qrc">
 			<Option target="Head_Unit_app"/>
 		</Unit>
@@ -313,6 +389,12 @@
 		</Unit>
 		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug/IC_someip-someip_autogen/mocs_compilation.cpp">
 			<Option target="IC_someip-someip"/>
+		</Unit>
+		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug/version_note.S">
+			<Option target="version_note_obj"/>
+		</Unit>
+		<Unit filename="/home/hanbin/OTA/Head-Unit/Head_Unit/v0.0.0/build-Head_Unit_app-Desktop-Debug/version_note.S.rule">
+			<Option target="version_note_obj"/>
 		</Unit>
 		<Unit filename="/home/hanbin/OTA/Head-Unit/src-gen/someip/v0/commonapi/ICSomeIPDeployment.cpp">
 			<Option target="IC_someip-someip"/>

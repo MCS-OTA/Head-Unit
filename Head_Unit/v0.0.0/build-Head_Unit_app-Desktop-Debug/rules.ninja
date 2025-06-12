@@ -58,6 +58,16 @@ rule CXX_EXECUTABLE_LINKER__Head_Unit_app
 
 
 #############################################
+# Rule for compiling ASM files.
+
+rule ASM_COMPILER__version_note_obj
+  depfile = $DEP_FILE
+  deps = gcc
+  command = /usr/bin/gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building ASM object $out
+
+
+#############################################
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE

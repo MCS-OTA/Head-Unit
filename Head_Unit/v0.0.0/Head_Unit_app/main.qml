@@ -214,6 +214,11 @@ ApplicationWindow {
         visible: gearController.selectedButton === "R" ? true : false
     }
 
+    UpdateWindow {
+        id: updateWindow
+        visible: otaUpdate.updateRequestValue === 1 ? true : false
+    }
+
     StartScreen {
         id: startScreen
         anchors.centerIn: parent

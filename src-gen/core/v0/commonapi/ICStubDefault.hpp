@@ -78,6 +78,12 @@ public:
         int32_t result = 0;
         _reply(result);
     }
+    COMMONAPI_EXPORT virtual void answerNotify(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _answer, answerNotifyReply_t _reply) {
+        (void)_client;
+        (void)_answer;
+        int32_t result = 0;
+        _reply(result);
+    }
     COMMONAPI_EXPORT virtual void fireBatteryStatusChangedEvent(const int32_t &_batValue) {
         ICStub::fireBatteryStatusChangedEvent(_batValue);
     }
@@ -89,6 +95,9 @@ public:
     }
     COMMONAPI_EXPORT virtual void firePdcStatusChangedEvent(const int32_t &_distValue) {
         ICStub::firePdcStatusChangedEvent(_distValue);
+    }
+    COMMONAPI_EXPORT virtual void fireAskNotifyEvent(const int32_t &_ask) {
+        ICStub::fireAskNotifyEvent(_ask);
     }
 
 

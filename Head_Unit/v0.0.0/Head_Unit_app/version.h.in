@@ -1,0 +1,4 @@
+#pragna once
+
+#define APP_VERSION "@APP_VERSION@"
+#define BUILD_TIMESTAMP "@BUILD_TIMESTAMP@"

@@ -93,6 +93,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        otaUpdate.setUpdateResponse(0)
                         otaUpdate.setUpdateRequest(0)
                         updateBackground.visible = false
                     }

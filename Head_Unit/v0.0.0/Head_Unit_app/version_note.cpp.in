@@ -1,0 +1,5 @@
+__attribute__((section(".note.version"), used))
+__attribute__((aligned(4)))
+const char version_note[] = 
+	"@APP_NAME@\n"
+	"{\"version\": \"@APP_VERSION@\", \"timestamp\": \"@BUILD_TIMESTAMP@\"}";

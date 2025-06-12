@@ -22,5 +22,6 @@
         <file>StartScreen.qml</file>
         <file>ParkingWindow.qml</file>
         <file>DistanceImageSet.qml</file>
+	<file>UpdateWindow.qml</file>
     </qresource>
 </RCC>

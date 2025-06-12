@@ -50,7 +50,8 @@ ICSomeIPProxy::ICSomeIPProxy(
           batteryStatusChanged_(*this, 0x80f3, CommonAPI::SomeIP::event_id_t(0x9c40), CommonAPI::SomeIP::event_type_e::ET_EVENT , CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE, false, std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr))),
           gearStatusChanged_(*this, 0x80f3, CommonAPI::SomeIP::event_id_t(0x9c41), CommonAPI::SomeIP::event_type_e::ET_EVENT , CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE, false, std::make_tuple(static_cast< CommonAPI::SomeIP::StringDeployment* >(nullptr))),
           lrSignStatusChanged_(*this, 0x80f3, CommonAPI::SomeIP::event_id_t(0x9c42), CommonAPI::SomeIP::event_type_e::ET_EVENT , CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE, false, std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr))),
-          pdcStatusChanged_(*this, 0x80f3, CommonAPI::SomeIP::event_id_t(0x9c43), CommonAPI::SomeIP::event_type_e::ET_EVENT , CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE, false, std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr)))
+          pdcStatusChanged_(*this, 0x80f3, CommonAPI::SomeIP::event_id_t(0x9c43), CommonAPI::SomeIP::event_type_e::ET_EVENT , CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE, false, std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr))),
+          askNotify_(*this, 0x80f3, CommonAPI::SomeIP::event_id_t(0x9c44), CommonAPI::SomeIP::event_type_e::ET_EVENT , CommonAPI::SomeIP::reliability_type_e::RT_UNRELIABLE, false, std::make_tuple(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr)))
 {
 }
 
@@ -69,6 +70,9 @@ ICSomeIPProxy::LrSignStatusChangedEvent& ICSomeIPProxy::getLrSignStatusChangedEv
 }
 ICSomeIPProxy::PdcStatusChangedEvent& ICSomeIPProxy::getPdcStatusChangedEvent() {
     return pdcStatusChanged_;
+}
+ICSomeIPProxy::AskNotifyEvent& ICSomeIPProxy::getAskNotifyEvent() {
+    return askNotify_;
 }
 
 void ICSomeIPProxy::setGear(std::string _gear, CommonAPI::CallStatus &_internalCallStatus, int32_t &_result, const CommonAPI::CallInfo *_info) {
@@ -237,6 +241,64 @@ std::future<CommonAPI::CallStatus> ICSomeIPProxy::setModeAsync(const int32_t &_m
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
         deploy_mode,
+        [_callback] (CommonAPI::CallStatus _internalCallStatus, CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t> > _result) {
+            if (_callback)
+                _callback(_internalCallStatus, _result.getValue());
+        },
+        std::make_tuple(deploy_result));
+}
+
+void ICSomeIPProxy::answerNotify(int32_t _answer, CommonAPI::CallStatus &_internalCallStatus, int32_t &_result, const CommonAPI::CallInfo *_info) {
+    CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t>> deploy_answer(_answer, static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr));
+    CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t>> deploy_result(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr));
+    CommonAPI::SomeIP::ProxyHelper<
+        CommonAPI::SomeIP::SerializableArguments<
+            CommonAPI::Deployable<
+                int32_t,
+                CommonAPI::SomeIP::IntegerDeployment<int32_t>
+            >
+        >,
+        CommonAPI::SomeIP::SerializableArguments<
+            CommonAPI::Deployable<
+                int32_t,
+                CommonAPI::SomeIP::IntegerDeployment<int32_t>
+            >
+        >
+    >::callMethodWithReply(
+        *this,
+        CommonAPI::SomeIP::method_id_t(0x7533),
+        false,
+        false,
+        (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
+        deploy_answer,
+        _internalCallStatus,
+        deploy_result);
+    _result = deploy_result.getValue();
+}
+
+std::future<CommonAPI::CallStatus> ICSomeIPProxy::answerNotifyAsync(const int32_t &_answer, AnswerNotifyAsyncCallback _callback, const CommonAPI::CallInfo *_info) {
+    CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t>> deploy_answer(_answer, static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr));
+    CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t>> deploy_result(static_cast< CommonAPI::SomeIP::IntegerDeployment<int32_t>* >(nullptr));
+    return CommonAPI::SomeIP::ProxyHelper<
+        CommonAPI::SomeIP::SerializableArguments<
+            CommonAPI::Deployable<
+                int32_t,
+                CommonAPI::SomeIP::IntegerDeployment<int32_t>
+            >
+        >,
+        CommonAPI::SomeIP::SerializableArguments<
+            CommonAPI::Deployable<
+                int32_t,
+                CommonAPI::SomeIP::IntegerDeployment<int32_t>
+            >
+        >
+    >::callMethodAsync(
+        *this,
+        CommonAPI::SomeIP::method_id_t(0x7533),
+        false,
+        false,
+        (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
+        deploy_answer,
         [_callback] (CommonAPI::CallStatus _internalCallStatus, CommonAPI::Deployable< int32_t, CommonAPI::SomeIP::IntegerDeployment<int32_t> > _result) {
             if (_callback)
                 _callback(_internalCallStatus, _result.getValue());

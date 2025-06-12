@@ -67,6 +67,11 @@ class ICStubAdapter
     * Instead, the "fire<broadcastName>Event" methods of the stub should be used.
     */
     virtual void firePdcStatusChangedEvent(const int32_t &_distValue) = 0;
+    /**
+    * Sends a broadcast event for askNotify. Should not be called directly.
+    * Instead, the "fire<broadcastName>Event" methods of the stub should be used.
+    */
+    virtual void fireAskNotifyEvent(const int32_t &_ask) = 0;
 
 
     virtual void deactivateManagedInstances() = 0;
@@ -112,11 +117,12 @@ public:
     typedef std::function<void (int32_t _result)> setGearReply_t;
     typedef std::function<void (int32_t _battery, int32_t _result)> getBatteryReply_t;
     typedef std::function<void (int32_t _result)> setModeReply_t;
+    typedef std::function<void (int32_t _result)> answerNotifyReply_t;
 
     virtual ~ICStub() {}
     void lockInterfaceVersionAttribute(bool _lockAccess) { static_cast<void>(_lockAccess); }
     bool hasElement(const uint32_t _id) const {
-        return (_id < 7);
+        return (_id < 9);
     }
     virtual const CommonAPI::Version& getInterfaceVersion(std::shared_ptr<CommonAPI::ClientId> _client) = 0;
 
@@ -126,6 +132,8 @@ public:
     virtual void getBattery(const std::shared_ptr<CommonAPI::ClientId> _client, getBatteryReply_t _reply) = 0;
     /// This is the method that will be called on remote calls on the method setMode.
     virtual void setMode(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _mode, setModeReply_t _reply) = 0;
+    /// This is the method that will be called on remote calls on the method answerNotify.
+    virtual void answerNotify(const std::shared_ptr<CommonAPI::ClientId> _client, int32_t _answer, answerNotifyReply_t _reply) = 0;
     /// Sends a broadcast event for batteryStatusChanged.
     virtual void fireBatteryStatusChangedEvent(const int32_t &_batValue) {
         auto stubAdapter = CommonAPI::Stub<ICStubAdapter, ICStubRemoteEvent>::stubAdapter_.lock();
@@ -149,6 +157,12 @@ public:
         auto stubAdapter = CommonAPI::Stub<ICStubAdapter, ICStubRemoteEvent>::stubAdapter_.lock();
         if (stubAdapter)
             stubAdapter->firePdcStatusChangedEvent(_distValue);
+    }
+    /// Sends a broadcast event for askNotify.
+    virtual void fireAskNotifyEvent(const int32_t &_ask) {
+        auto stubAdapter = CommonAPI::Stub<ICStubAdapter, ICStubRemoteEvent>::stubAdapter_.lock();
+        if (stubAdapter)
+            stubAdapter->fireAskNotifyEvent(_ask);
     }
 
 
